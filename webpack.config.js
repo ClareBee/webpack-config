@@ -3,11 +3,14 @@ const path = require('path');
 const autoprefixer = require('autoprefixer');
 
 module.exports = {
+  mode: 'development',
   devtool: 'cheap-module-eval-source-map',
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
+    // supports code-splitting
+    chunkFilename: '[id].js',
     publicPath: ''
   },
   resolve: {
@@ -34,12 +37,12 @@ module.exports = {
             }
           },
           {
-            loader: 'post-css-loader',
+            loader: 'postcss-loader',
             options: {
               ident: 'postcss',
               plugins: () => {
                 autoprefixer({
-                  browers: [
+                  browsers: [
                     "> 1%",
                     "last 2 versions"
                   ]
